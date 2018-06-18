@@ -6,3 +6,9 @@ new Vue({
   el: 'body',
   components: { App }
 })
+var page = document.getElementById('app')
+console.log(page)
+var btnSignUp = page.querySelectorAll('.main-page button')
+console.log(btnSignUp)
+var sections = page.querySelectorAll('.content')
+console.log(sections)

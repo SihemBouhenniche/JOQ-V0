@@ -1,6 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top nav-page">
-        <a class="navbar-brand brand" href="#">JOQ</a>
+  <div id="headerpage">
+    <div class="navP" v-if = "show">
+      <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top nav-page">
+        <a class="navbar-brand brand" href="#app">JOQ</a>
         <div class="separator"></div>
         <ul class="navbar-nav">
           <li class="nav-item">
@@ -10,22 +12,58 @@
             <a class="nav-link" href="#how">How it works</a>
           </li>
         </ul>
-        <button type="button" class="btn btn-info btn-page">Client</button>
-        <button type="button" class="btn btn-info btn-page">Freelancer</button>
-  </nav>
+        <button type="button" class="btn btn-info btn-page" v-on:click="clientF">Client</button>
+        <button type="button" class="btn btn-info btn-page" v-on:click="freeF">Freelancer</button>
+      </nav>
+    </div>
+    <div class="clientdiv" v-if = "clientShow">
+      <client></client>
+    </div>
+    <div class="freediv" v-if = "freeShow">
+      <freelancerform></freelancerform>
+    </div>
+  </div>
 </template>
 
 <script>
+  import Freelancerform from './Freelancerform'
+  import client from './client'
 export default {
+  props: {
+      show:{
+        type : Boolean,
+        default : true
+      },
+      clientShow: {
+        type : Boolean,
+        default : false
+      },
+      freeShow: {
+        type : Boolean,
+        default : false
+      }
+    },
   data () {
     return {
-      // note: changing this line won't causes changes
-      // with hot-reload because the reloaded component
-      // preserves its current state and we are modifying
-      // its initial state.
       msg: 'Hello World!'
     }
-  }
+  },
+  methods : {
+    clientF: function (event) {
+      this.show = false
+      this.$parent.show = false
+      this.clientShow = true
+    },
+    freeF: function (event) {
+      this.show = false
+      this.$parent.show = false
+      this.freeShow = true
+    }
+  },
+  components: {
+    Freelancerform,
+    client
+  },
 }
 </script>
 

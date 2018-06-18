@@ -1,26 +1,38 @@
 <template>
   <div class="container-fluid content">
     <div class="row">
-      <div class="col-sm-6" v-if = "right"></div>
+      <containerimg v-if= "right" v-bind:linkimg ="img"></containerimg>
       <div class="col-sm-6">
         <h1>{{ title }}</h1>
         <p>{{ description }}</p>
       </div>
+      <containerimg v-if= "!right" v-bind:linkimg ="img"></containerimg>
     </div>
   </div>
 </template>
 
 <script>
+import Containerimg from './Containerimg'
 export default {
 //props : ['title', 'description','right': false]
+
 props : {
   title : String,
   description : String,
   right : {
     type : Boolean,
     default : false
+  },
+  link : Array
+},
+components: {
+    Containerimg
+  },
+data () {
+    return {
+      img: this.link
+    }
   }
-}
 }
 </script>
 
